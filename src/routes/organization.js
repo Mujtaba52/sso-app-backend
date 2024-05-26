@@ -1,7 +1,7 @@
 import express from 'express';
-import { create } from '../lib/organization.js';
+import { createOrganization } from '../controllers/organization.js';
 const orgRouter = express.Router();
 
-orgRouter.post('/', create);
+orgRouter.post('', createOrganization);
 
 export default orgRouter;

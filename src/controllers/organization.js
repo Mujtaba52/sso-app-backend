@@ -1,4 +1,4 @@
-import * as organization from "../lib/organization"
+import * as organization from "../lib/organization.js";
 
 const createOrganization = async (req, res)=>{
     try{
@@ -14,5 +14,6 @@ const createOrganization = async (req, res)=>{
             message: error.message
         });
     }
-    
 }
+
+export { createOrganization }
