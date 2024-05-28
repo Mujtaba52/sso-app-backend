@@ -1,4 +1,6 @@
 import { SAML } from "@node-saml/node-saml";
+import "dotenv/config";
+import jwt from 'jsonwebtoken';
 
 
 async function getLoginUrl(samlOptions) {
@@ -13,6 +15,6 @@ async function validateLogin(samlResponse, samlOptions) {
     return response.profile;
   };
 
-const generateAccessToken = id =>jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '24h' });
+  const generateAccessToken = id=> jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '24h' });
 
 export { getLoginUrl, validateLogin, generateAccessToken }
