@@ -5,6 +5,6 @@ const authRouter = express.Router();
 
 
 authRouter.get("/sso-login", ssoLogin);
-authRouter.get("/sso-ssoCallback", ssoCallback);
+authRouter.post("/sso-callback", ssoCallback);
 
 export default authRouter;

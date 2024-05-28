@@ -6,18 +6,17 @@ import * as user from '../lib/user.js';
 
 const ssoLogin = async (req, res)=>{
     let { domainName } = req.query;
-    domainName = domainName.trim().toLowerCase()
     const organization = await organizations.findOne({domainName})
 
     if(!organization) return res.status(404).json({ message: "No organization found" });
-    const loginUrl = await getLoginUrl(organization.ssoConfig);
+    const { ssoConfig } = organization;
+    const loginUrl = await getLoginUrl(ssoConfig);
     res.json({ ssoUrl: loginUrl });
   }
 
   async function ssoCallback(req, res) {
     try {
-      let { domainName = 'gmail' } = req.query;
-      domainName = domainName.trim().toLowerCase()
+      let { domainName } = req.query;
       const organization = await organizations.findOne({domainName})
 
       if(!organization) throw boom.notFound('Organization Not found');
@@ -27,8 +26,7 @@ const ssoLogin = async (req, res)=>{
       const ssoUser = await user.findOne({ email });
 
       if (!ssoUser) { throw boom.unauthorized('SSO login was attempt was failed.') }
-      const userAccessToken = generateAccessToken(ssoUser._id);
-
+      const userAccessToken = generateAccessToken(ssoUser._id.toString());
       //redirect to dashboard with the token in the url.
       res.redirect(`${process.env.DASHBOARD_URL}?token=${userAccessToken}`);
     } catch (error) {

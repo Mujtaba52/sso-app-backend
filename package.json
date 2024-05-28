@@ -14,8 +14,10 @@
   "dependencies": {
     "@hapi/boom": "^10.0.1",
     "@node-saml/node-saml": "^5.0.0",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.4.0"
   },
   "devDependencies": {

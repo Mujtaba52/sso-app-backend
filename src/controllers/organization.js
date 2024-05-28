@@ -11,7 +11,7 @@ const createOrganization = async (req, res)=>{
     catch(e){
         return res.json({ 
             status: "failed",
-            message: error.message
+            message: e.message
         });
     }
 }
